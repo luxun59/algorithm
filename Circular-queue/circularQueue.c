@@ -2,7 +2,7 @@
  * @Author: luxun59 luxun59@126.com
  * @Date: 2022-12-19 15:43:07
  * @LastEditors: luxun59 luxun59@126.com
- * @LastEditTime: 2022-12-19 23:00:16
+ * @LastEditTime: 2022-12-20 09:51:57
  * @FilePath: \algorithm\Circular-queue\circularQueue.c
  * @Description: 
  * 
@@ -94,15 +94,17 @@ int enqueue(pqueue q, int val)
  * @param {pqueue} q
  * @return {*}
  */
-bool dequeue(pqueue q)
+elem dequeue(pqueue q)
 {
+    elem temp;
     if(empty_queue(q))
         return 0;
     else
     {
+        temp = *(q->data + q->front);
         q->front = (q->front+1)%q->max_size;
     }
-    return true;
+    return temp;
 }
 
 void qeueFree(pqueue obj) {
@@ -110,33 +112,33 @@ void qeueFree(pqueue obj) {
     free(obj);
 }
 
-// void print_queue(pqueue q)
-// {
-//     int i;
-//     if(empty_queue(q)) {
-//         printf("queue is empty\n");
-//         return ;
-//     } else {
-//         for(i = q->front; i < q->rear; i++)
-//             printf("queue data is %d\n", q->data[i]);
-//     }
-//     return;
-// }
+void print_queue(pqueue q)
+{
+    int i;
+    if(empty_queue(q)) {
+        printf("queue is empty\n");
+        return ;
+    } else {
+        for(i = q->front; i < q->rear; i++)
+            printf("queue data is %d\n", q->data[i]);
+    }
+    return;
+}
 
-// int main()
-// {
-//     int i, num;
-//     queue Q;
-//     init_queue(&Q, 100);
-//     for(i = 0; i < 3; i++)
-//     {
-//         printf("please input a number:");
-//         scanf("%d", &num);
-//         printf("\n");
-//         if(enqueue(&Q, num) != 0)
-//             printf("enqueue successful!\n");
-//     }
-//     print_queue(&Q);
-//     return 0;
-// }
+int main()
+{
+    int i, num;
+    queue Q;
+    init_queue(&Q, 100);
+    for(i = 0; i < 3; i++)
+    {
+        printf("please input a number:");
+        scanf("%d", &num);
+        printf("\n");
+        if(enqueue(&Q, num) != 0)
+            printf("enqueue successful!\n");
+    }
+    print_queue(&Q);
+    return 0;
+}
 
